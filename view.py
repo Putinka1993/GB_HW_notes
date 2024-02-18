@@ -1,8 +1,9 @@
-
+import controller
 
 class Show_information:
 
-    def __init__(self):
-        pass
+    def __init__(self, info):
+        print(info)
     def show_point(self):
-        pass
+        start = controller.Control()
+        return start.enter_command()
