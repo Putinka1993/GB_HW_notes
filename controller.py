@@ -22,8 +22,6 @@ class Control:
                     self.get_command.edit_function()
                 case 'delete':
                     self.get_command.delete_function()
-                case 'information':
-                    self.get_command.information_function()
                 case _:
                     start = view.Show_information(f"Неверная команда, попробуйте заново !")
                     return start.show_point()

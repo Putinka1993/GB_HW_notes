@@ -16,7 +16,7 @@ class My_function:
         current_date = datetime.date.today().isoformat()
 
         # write file
-        data['notes'].append({self.title: [{"content": self.content, "date": current_date}]})
+        data['notes'].append({"title": self.title, "content": self.content, "date": current_date})
         with open("myjson.json", "w", encoding="utf-8") as file:
             file.write(json.dumps(data, indent=2, ensure_ascii=False))
 
@@ -29,21 +29,37 @@ class My_function:
         return data
 
     def date_function(self):
-        pass
+        data = self.read_function()
+        data = sorted(data['notes'], key=lambda note: note['date'])
+        return data
 
     def show_function(self):
-        info = view.Show_information("ввведите название заметки которую хотите отоброзить")
+        view.Show_information("ввведите название заметки которую хотите отоброзить")
         choice = input("название: ")
-        data = self.read_function()
-        for i in data['notes']:
-            if i.get(f"{choice}"):
-                print(i)
+        if choice == "":
+            start = view.Show_information("")
+            return start.show_point()
 
-        # start = view.Show_information(f"вывод всех заметок {self.read_function()}")
-        # return start.show_point()
+        data = self.date_function()
+        result = []
+        for i in data:
+            for k, v in i.items():
+                if v == choice:
+                    result.append(i)
+        if len(result):
+            for el in result:
+                view.Show_information(f"{el}")
+        else:
+            view.Show_information("такой заметки нет")
+        start = view.Show_information("")
+        return start.show_point()
 
     def show_all_function(self):
-        start = view.Show_information(f"вывод всех заметок {self.read_function()}")
+        view.Show_information("Вывод всех заметок")
+        data = self.date_function()
+        for i in data:
+            view.Show_information(i)
+        start = view.Show_information("")
         return start.show_point()
 
     def add_function(self):
@@ -51,14 +67,58 @@ class My_function:
         note_title = input("введите заголовок заметки: ")
         note_content = input("введите содержание заметки: ")
 
+        if note_content == "" or note_title == "":
+            start = view.Show_information("")
+            return start.show_point()
+
         return self.save_function(note_title, note_content)
 
     def edit_function(self):
-        pass
+        view.Show_information("ввведите название заметки которую хотите редактировать")
+        choice = input("название: ")
+        if choice == "":
+            start = view.Show_information("")
+            return start.show_point()
+
+        data = self.date_function()
+        result = []
+        for i in data:
+            for k, v in i.items():
+                if v == choice:
+                    result.append(1)
+                    i['content'] = input(f"Введите новые данные для заметки {choice}: ")
+
+        if len(result):
+            view.Show_information(f"заметка {choice} успешно изменена!")
+        else:
+            view.Show_information("такой заметки нет")
+
+        with open("myjson.json", "w", encoding="utf-8") as file:
+            file.write(json.dumps(data, indent=2, ensure_ascii=False))
+
+        start = view.Show_information("")
+        return start.show_point()
 
     def delete_function(self):
-        pass
+        # view.Show_information("ввведите название заметки которую хотите удалить")
+        # choice = input("название: ")
+        # data = self.date_function()
+        # result = []
+        # for i in data:
+        #     for k, v in i.items():
+        #         if v == choice:
+        #             print(i)
+        #             del data[i]
+        #             result.append(1)
 
-    def information_function(self):
-        pass
+        # if len(result):
+        #     view.Show_information(f"заметка {choice} успешно удалена!")
+        # else:
+        #     view.Show_information("такой заметки нет")
+        #
+        # with open("myjson.json", "w", encoding="utf-8") as file:
+        #     file.write(json.dumps(data, indent=2, ensure_ascii=False))
+        #
+        start = view.Show_information("")
+        return start.show_point()
 
