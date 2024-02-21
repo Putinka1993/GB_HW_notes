@@ -1,17 +1,24 @@
-[
-  {
-    "title": "test",
-    "content": "lalalla",
-    "date": "2023-02-19"
-  },
-  {
-    "title": "test3",
-    "content": "Все когда то бывает в первый раз и не только ",
-    "date": "2026-02-19"
-  },
-  {
-    "title": "test2",
-    "content": "contenttemp",
-    "date": "2024-04-19"
-  }
-]
+{
+  "notes": [
+    {
+      "title": "test",
+      "content": "lalalla",
+      "date": "2023-02-19"
+    },
+    {
+      "title": "test3",
+      "content": "Все когда то бывает в первый раз и не только ",
+      "date": "2026-02-19"
+    },
+    {
+      "title": "test2",
+      "content": "contenttemp",
+      "date": "2024-04-19"
+    },
+    {
+      "title": "pip",
+      "content": "pop",
+      "date": "2024-02-21"
+    }
+  ]
+}
